@@ -1,0 +1,346 @@
+# Activity 2: 
+# Create R code for effective	data loading, storage and utilization
+
+# Q1:
+# Install	packages ggplot2,	car, caret,	corrplot and	use	library	to use them
+
+# Install the required packages for this project
+install.packages("ggplot2")
+install.packages("car")
+install.packages("caret")
+install.packages("corrplot")
+
+# Check the installation
+installed.packages("ggplot2")
+installed.packages("car")
+installed.packages("caret")
+installed.packages("corrplot")
+
+# Loading the required packages for this project
+library("ggplot2")
+library("car")
+library("caret")
+library("corrplot")
+
+
+
+# Activity 2: 
+# Create R code for effective	data loading, storage and utilization
+
+# Q2:
+# Load the MTCARS file from the R studio default dataset
+
+mtcars <- mtcars
+
+# Removing the outliers to improve the accuracy of the model (checked in reverse engineering)
+mtcars <- mtcars[mtcars$mpg > 0 & mtcars$mpg <32, ]
+mtcars <- mtcars[mtcars$qsec > 0 & mtcars$qsec <22, ]
+
+
+
+# Activity 2: 
+# Create R code for effective	data loading, storage and utilization
+
+# Q3:
+# Understand the dataset by using standard function str, head	and summary
+
+# str() - Used to see the structure of the data
+# head() - Used to see some samples of rows of the data
+# summary() - Used to see the descriptive statistics of the data
+
+str(mtcars)
+
+head(mtcars)
+
+summary(mtcars)
+
+
+
+# Activity 2: 
+# Create R code for effective	data loading, storage and utilization
+
+# Q4:
+# Mention the number of records and fields from MTCARS in your project report
+
+# dim() - This will provide the dimensions of the data, i.e. the Number of Rows and Columns the data has
+
+dim(mtcars)
+
+
+
+
+# Extra Work (Compulsory)
+# Exploratory Data Analysis to check the following assumptions:
+
+# 1. - All the independant variables should have the linear relationship to the dependant variable
+
+
+# 1. MPG vs Cyl (No linear relationship because cyl is not continuous and will lead to high errors)
+ggplot(data=mtcars, aes(x=cyl, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs cyl", subtitle="From mtcars dataset", y="MPG", x="cyl", caption="Mtcars Demographics")
+
+# 2. MPG vs disp (Linear relationship)
+ggplot(data=mtcars, aes(x=disp, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs disp", subtitle="From mtcars dataset", y="MPG", x="disp", caption="Mtcars Demographics")
+
+# 3. MPG vs hp (Linear relationship)
+ggplot(data=mtcars, aes(x=hp, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs hp", subtitle="From mtcars dataset", y="MPG", x="hp", caption="Mtcars Demographics")
+
+# 4. MPG vs drat (Linear relationship)
+ggplot(data=mtcars, aes(x=drat, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs drat", subtitle="From mtcars dataset", y="MPG", x="drat", caption="Mtcars Demographics")
+
+# 5. MPG vs wt (Linear relationship)
+ggplot(data=mtcars, aes(x=wt, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs wt", subtitle="From mtcars dataset", y="MPG", x="wt", caption="Mtcars Demographics")
+
+# 6. MPG vs qsec (Linear relationship)
+ggplot(data=mtcars, aes(x=qsec, y=mpg)) +
+geom_point() + geom_smooth(method="lm") +
+labs(title="MPG Vs qsec", subtitle="From mtcars dataset", y="MPG", x="qsec", caption="Mtcars Demographics")
+
+# 7. MPG vs vs (No linear relationship because vs is not continuous and will lead to high errors)
+ggplot(data = mtcars, aes(x=vs, y=mpg)) + 
+geom_point() + geom_smooth(method="lm") + 
+labs(title="MPG Vs vs", subtitle="From mtcars dataset", y="MPG", x="vs", caption="Mtcars Demographics")
+
+# 8. MPG vs am (No linear relationship because am is not continuous and will lead to high errors)
+ggplot(data=mtcars, aes(x=am, y=mpg)) + 
+geom_point() + geom_smooth(method="lm") + 
+labs(title="MPG Vs am", subtitle="From mtcars dataset", y="MPG", x="am", caption="Mtcars Demographics")
+
+# 9. MPG vs gear (No linear relationship because gear is not continuous and will lead to high errors)
+ggplot(data=mtcars, aes(x=gear, y=mpg)) + 
+geom_point() + geom_smooth(method="lm") + 
+labs(title="MPG Vs gear", subtitle="From mtcars dataset", y="MPG", x="gear", caption="Mtcars Demographics")
+
+# 10. MPG vs carb (This requires reverse engineering)
+ggplot(data = mtcars, aes(x=carb, y=mpg)) + 
+geom_point() + geom_smooth(method="lm") + 
+labs(title="MPG Vs carb", subtitle="From mtcars dataset", y="MPG", x="carb", caption="Mtcars Demographics")
+
+
+
+# 2. - The dependant variable should follow the normal distribution
+
+ggplot(data=mtcars, aes(mpg)) + 
+geom_histogram(bins = 10)
+
+
+
+
+# 3. - There should be no multicollinearity between the independant variables
+
+
+# Activity 3:
+# Perform data handling standards and procedures
+
+# Q1:
+# Factorise am, cyl, vs and gear fields
+
+mtcars$am <- as.factor(mtcars$am)
+mtcars$cyl <- as.factor(mtcars$cyl)
+mtcars$vs <- as.factor(mtcars$vs)
+mtcars$gear <- as.factor(mtcars$gear)
+
+# Check that the 4 mentioned fields have been converted to factors
+
+str(mtcars)
+
+
+
+# Activity 3:
+# Perform data handling standards and procedures
+
+# Q2:
+# Dropping dependent variable	for calculating Multicollinearity(mpg)
+
+x <- mtcars[,c(-1)]   # Separating all the independent columns in a variable to check multicollinearity
+y <- mtcars$mpg       # Separating the dependent column
+
+
+
+# Activity 3:
+# Perform data handling standards and procedures
+
+# Q3:
+# Display the new data and check if mpg is displayed or not
+
+# Check that the dependant variable has been dropped
+
+x
+
+
+
+
+# Activity 4:
+# Identifying	numeric	variables
+
+# Q1:
+# Identifying	numeric	variables using	apply function and display
+
+x_numeric_var <- x[sapply(x, is.numeric)]
+
+# display the numeric variables
+
+x_numeric_var
+
+
+
+# Activity 4:
+# Identifying	numeric	variables
+
+# Q2:
+# Write down in your project report all the numeric fields
+
+# Answer: disp, hp, drat, wt, qsec, carb
+
+
+
+
+# Activity 5:
+# Data management tools / standards for Correlation Matrix and Correlated attributes
+
+# Q1:
+# Calculating	Correlation
+# Q2:
+# Print correlation matrix and look at max correlation
+# Q3:
+# Visualize Correlation Matrix
+# Q4:
+# Identifying	Variable Names of Highly Correlated Variables
+# Q5:
+# Print highly correlated attributes
+# Q6:
+# Write down in your project report all the highly correlated attributes
+# Answer: disp, hp
+# Q7:
+# Remove highly correlated variables and create a new dataset
+# Q8:
+# Write down in your project report the dimensions of new dataset
+# Answer: 32 rows and 4 columns
+
+
+x_mat_cor <- cor(x_numeric_var)
+print(x_mat_cor)
+
+corrplot(x_mat_cor, method="number", order="alphabet")
+
+
+
+Threshold <- 0.75    # Threshold from -0.75 to 0.75
+
+x_high_corr_cutoff <- findCorrelation(x_mat_cor, cutoff=Threshold)
+x_high_corr_cutoff_colnames <- colnames(x_mat_cor)[x_high_corr_cutoff]
+
+x_high_corr_cutoff_colnames
+
+
+
+x_new <- x_numeric_var[, -which(colnames(x_numeric_var) %in% x_high_corr_cutoff_colnames)]
+
+
+# Removing the carb column from x_new as its coefficient is very close to 0, which means it is not important for the model (checked in reverse engineering)
+x_new <- x_new[,c(-4)]
+
+
+dim(x_new)
+print(x_new)
+
+
+
+
+# Activity 6:
+# Propose Model Creation
+
+# Q1:
+# Build Linear Regression Model
+# Q2:
+# Check Model Performance using summary
+# Q3:
+# Extracting Coefficients using summary
+# Q4:
+# Take screenshot of summary coefficients
+
+
+model <- lm(y ~ ., data=x_new)
+# model <- lm(y ~ drat + wt + qsec, data=x_new)
+summary(model)
+
+coefficients <- model$coefficients
+coefficients
+
+
+
+
+# Activity 7:
+# Plot model
+
+# Q1:
+# Plot the fit model in a 2*2 matrix using par
+# Q2:
+# Take screenshot of fit
+# Q3:
+# Mention the R squared in the Project report
+
+
+par(mfrow=c(2,2))
+plot(model)
+
+model$fitted.values
+
+
+
+
+# Activity 8:
+# Establish internal processes to Calculating Model Performance, monitor compliance of data with relevant metrics procedure
+
+# Q1:
+# Extracting R-squared value
+# Q2:
+# Extracting Adjusted	R-squared value
+# Q3:
+# Mention the above values in the Project report
+
+
+r_squared <- summary(model)$r.squared
+adjusted_r_squared <- summary(model)$adj.r.squared
+
+r_squared
+adjusted_r_squared
+
+
+
+
+# Activity 9:
+# Predict mpg
+
+# Q1:
+# Use function predict for the fit and dataframe from activity 5
+# Q2:
+# Use cbind to combine original mtcars and predicted values
+# Q3:
+# Print both actual and predicted mpg
+
+
+Predictions <- predict(model, x_new)
+Actual <- y
+
+final <- cbind(x_new, Actual, Predictions)
+
+final
+
+
+
+# Plot for Actual Vs Predictions
+
+ggplot(data=final, aes(x=Actual, y=Predictions)) + 
+geom_point() + 
+labs(title="Actual Vs Predicted", subtitle="For Model", y="Predicted", x="Actual", caption="Mtcars Demographics")
+

@@ -28,7 +28,7 @@ Once the Linear Regression model is built, the ***MPG*** value can be predicted 
 
 **R Code and Details (some snippets)**  
 
-- **When checking for linear relationship between the dependant variable and independant variables, plots are created and some outliers are detected.**
+- **When checking for linear relationship between the dependant variable and independant variables, plots are created and some outliers are detected**
 
 ```r
 # 4. MPG vs drat (Linear relationship)

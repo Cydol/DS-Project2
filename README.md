@@ -39,7 +39,7 @@ labs(title="MPG Vs drat", subtitle="From mtcars dataset", y="MPG", x="drat", cap
 
 ![](./images/exploratory.JPG)
 
-The scatterplot shows that there is a linear relationship between ***MPG*** and drat (Rear axle ratio). Also, 2 outlier data points are detected and subsequently removed in the final dataset used to build the linear regression model.
+The scatterplot shows that there is a linear relationship between ***MPG*** and drat (Rear axle ratio). Also, 2 outlier data points are detected and subsequently removed in the final dataset used to build the linear regression model.</br></br>
 
 - **Checking for correlation between independant variables to be used in the linear regression model**
 
@@ -52,7 +52,7 @@ corrplot(x_mat_cor, method="number", order="alphabet")
 
 The higher the colour saturation of the shown values, the higher the correlation between the 2 independant variables (one from the column **vs** another one from the row).
 
-Multicollinearity occurs when two or more pairs of independant variables have a high correlation with one another. This is bad for the linear regression model as it undermines the statistical significance of those independent variables.
+Multicollinearity occurs when two or more pairs of independant variables have a high correlation with one another. This is bad for the linear regression model as it undermines the statistical significance of those independent variables.</br></br>
 
 - **Creating and fine-tuning the Linear Regression Model**
 

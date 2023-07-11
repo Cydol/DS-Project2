@@ -10,22 +10,29 @@
   - [_BRP-R-Codes_](./source/BRP-R-Codes.Rmd) (R code file)
   - [_images_](./images) folder (Misc. image files)
 
+---
 ### Description  
+---
 In this project, analysis is performed on the ***MTCARS*** dataset to investigate if there is a linear relationship between ***MPG*** (dependant variable) and the other independant variables.
 
 After checking for the assumptions of Linear Regression, a Linear Regression model is created and fine-tuned. The forecast model for ***MPG*** is thus completed.
 
+---
 ### Background
+---
 ***MTCARS*** dataset (Motor Trend Car Road Tests) is a built-in dataset in R derived from the 1974 Motor Trend US magazine, comprising of fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-1974 models).
 
 ***MPG*** stands for ***M***_iles_ ***P***_er_ ***G***_allon_ and is the main indicator of performance of an automobile which the project aims to predict.
 
 Once the Linear Regression model is built, the ***MPG*** value can be predicted when given the values of the other independant variables used in the model.
 
+---
 ### Sample Work
+---
 **Project Workflow**  
 ![](./images/workflow.JPG)
 
+##
 **R Code and Details (some snippets)**  
 
 - **When checking for linear relationship between the dependant variable and independant variables, plots are created and some outliers are detected**
@@ -39,8 +46,9 @@ labs(title="MPG Vs drat", subtitle="From mtcars dataset", y="MPG", x="drat", cap
 
 ![](./images/exploratory.JPG)
 
-The scatterplot shows that there is a linear relationship between ***MPG*** and drat (Rear axle ratio). Also, 2 outlier data points are detected and subsequently removed in the final dataset used to build the linear regression model.</br></br>
+The scatterplot shows that there is a linear relationship between ***MPG*** and drat (Rear axle ratio). Also, 2 outlier data points are detected and subsequently removed in the final dataset used to build the linear regression model.
 
+##
 - **Checking for correlation between independant variables to be used in the linear regression model**
 
 ```r
@@ -52,8 +60,9 @@ corrplot(x_mat_cor, method="number", order="alphabet")
 
 The higher the colour saturation of the shown values, the higher the correlation between the 2 independant variables (one from the column **vs** another one from the row).
 
-Multicollinearity occurs when two or more pairs of independant variables have a high correlation with one another. This is bad for the linear regression model as it undermines the statistical significance of those independent variables.</br></br>
+Multicollinearity occurs when two or more pairs of independant variables have a high correlation with one another. This is bad for the linear regression model as it undermines the statistical significance of those independent variables.
 
+##
 - **Creating and fine-tuning the Linear Regression Model**
 
 ```r
@@ -100,5 +109,7 @@ labs(title="Actual Vs Predicted", subtitle="For Model", y="Predicted", x="Actual
 
 ![](./images/model-scatterplot.JPG)
 
+---
 ### Conclusion
+---
 A program in R is written using RStudio to create a Linear Regression model which can be used to predict the ***MPG*** value of cars (which is used as a performance indicator of cars). 
